@@ -10,6 +10,7 @@
 // import Schedule_meeting from "./Schedule_meeting";
 import * as React from "react";
 import {Link} from "react-router-dom"
+import User from "./User";
 
 const Nav = () => {
     return (
@@ -19,7 +20,7 @@ const Nav = () => {
                 <button>login</button>
             </Link>
             <Link to={`/User`}>
-              <button>user</button>
+              <button onClick={showUser()}>user</button>
             </Link>
             <Link to={`/Manager`}>
               <button>Manager</button>
