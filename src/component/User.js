@@ -1,10 +1,10 @@
 import { React } from "react";
 
 export default function User() {
-  const showUser = () => {
-    // debugger;
-    return "show user is working";
-  };
+  // const showUser = () => {
+  //   // debugger;
+  //   return "show user is working";
+  // };
   return(<></>)
 }
 

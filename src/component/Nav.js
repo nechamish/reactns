@@ -17,10 +17,10 @@ const Nav = () => {
         <div className="Nav">
             
             <Link to={`/`}>
-                <button>login</button>
+              <button>login</button>
             </Link>
             <Link to={`/User`}>
-              <button onClick={showUser()}>user</button>
+              <button >user</button>
             </Link>
             <Link to={`/Manager`}>
               <button>Manager</button>

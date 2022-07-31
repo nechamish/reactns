@@ -5,19 +5,22 @@ import Nav from "./component/Nav";
 import Signiin from "./component/Signin";
 import User from "./component/User";
 import Manager from "./component/Manager";
+import Business from "./component/Business";
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Nav>
-          <Routes>
-            <Route path="/" element={<Signiin />} ></Route>
-            <Route path="/User" element={<User/>}></Route>
-            <Route path="/Manager" element={<Manager/>}></Route>
-          </Routes>
-        </Nav>
-      </Router>
-    </div>
+    <Manager></Manager>
+    // <Business></Business>
+    // <div className="App">
+    //   <Router>
+    //     <Signiin>
+    //       <Routes>
+    //         {/* <Route path="/" element={<Signiin />} ></Route> */}
+    //         <Route path="/User" element={<User/>}></Route>
+    //         <Route path="/Manager" element={<Manager/>}></Route>
+    //       </Routes>
+    //     </Signiin>
+    //   </Router>
+    // </div>
   );
 }
 export default App;
