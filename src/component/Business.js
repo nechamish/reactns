@@ -2,46 +2,19 @@ import { useState,useEffect} from "react";
 import axios from "axios";
 
 export default function Business() {
-  // const [business, setBusiness] = useState();
+  const [business, setBusiness] = useState();
 
-  // const detailsbusiness = async() => {
-  //   let business;
-  //   try {
-  //     const res = await axios
-  //       .get(
-  //         "https://meetings-test.herokuapp.com/business/6d720e93-d827-4340-a0bc-147ed8f62776"
-  //       )
-  //       .then(() => {
-  //         business = res.data;
-  //         console.log(business);
-  //         if (business!=undefined){
-  //           return Object.keys(business).map(function (keyName, keyIndex) {
-  //             <p>{keyName}</p>;
-  //             <p>{business[keyName]}</p>;
-  //           });
-  //         }
-  //         debugger;
-  //       });
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-
-
- 
-    async function detailsbusiness() {
-      let business;
+  async function detailsbusiness() {
       debugger;
       try {
         debugger;
         const res = await axios
           .get(
-            "https://meetings-test.herokuapp.com/business/6d720e93-d827-4340-a0bc-147ed8f62776"
+            "https://meetings-test.herokuapp.com/business/5e8da483-0a02-4131-b52f-648cf5e4c974"
           )
           .then((res) => {
             debugger;
-            business = res.data;
+            setBusiness(res.data); 
             console.log("inserted: " + res.data);
           });
       } catch (err) {
@@ -58,7 +31,7 @@ export default function Business() {
     try {
       const res = axios
         .put(
-          "https://meetings-test.herokuapp.com/business/6d720e93-d827-4340-a0bc-147ed8f62776"
+          "https://meetings-test.herokuapp.com/business/5e8da483-0a02-4131-b52f-648cf5e4c974"
         )
         .then(() => {
           business = res.data;
@@ -77,6 +50,27 @@ export default function Business() {
         <button onClick={changebusiness}>to change the details</button>
         {/* <button onClick={changemeetings()}>to change the meetings</button> */}
       </div>
+      {business != undefined ? (
+        <div>
+          <h2>details business</h2>
+          <p>{business.businessName}</p>
+          <p>{business.id}</p>
+          <p>{business.ownersName}</p>
+          <div>
+            <img src={business.img} alt="car" />
+          </div>
+          <p>{business.img}</p>
+          <p>
+            {business.services.forEach((element) => {
+              <p>{element.name}</p>;
+              <p>{element.cost}</p>;
+            })}
+          </p>
+          ;
+        </div>
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }
