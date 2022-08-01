@@ -73,7 +73,7 @@ export default function Business() {
     <>
       <h1>Business</h1>
       <div>
-        <button onClick={  detailsbusiness}>details of the business</button>
+        <button onClick={detailsbusiness}>details of the business</button>
         <button onClick={changebusiness}>to change the details</button>
         {/* <button onClick={changemeetings()}>to change the meetings</button> */}
       </div>

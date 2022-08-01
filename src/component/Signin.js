@@ -1,20 +1,27 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import react from "react";
+
 import axios from "axios";
-// import useNavigate from "use-navigate";
+import { useState } from "react";
 
-export default function Signiin() {
-  let user;
-  const navigate = useNavigate();
-  const [password, setPassword] = useState();
 
-  const sendToDb = (async) => {
+export default function Signin() {
+
+  const [id, setId] = useState();
+  const [username, setUsername] = useState();
+  const [manager, setManager] = useState();
+
+  const login = async () => {
     try {
-      const res = axios
-        .get("https://meetings-test.herokuapp.com/user/signin")
-        .then(() => {
-          user = res.data;
+      const res = await axios
+        .get(
+          "https://meetings-test.herokuapp.com/user/5e8da483-0a02-4131-b52f-648cf5e4c974"
+        )
+        .then((res) => {
+          setManager(res.data);
+          if (res.data.id === id && res.data.username === username) {
+            console.log("i am manager");
+        }
+          console.log(manager);
           debugger;
         });
     } catch (err) {
@@ -24,18 +31,14 @@ export default function Signiin() {
 
   return (
     <>
-      <p>enter username</p>
-      <input></input>
-      <p>enter password</p>
-      <input
-        onChange={(e) => {
-          setPassword(e.target.value);
-        }}
-        id="password"
-        name="password"
-        type="password"
-      ></input>
-      <button onSubmit={sendToDb()}>sginin</button>
+      <div>
+        <h1>Login</h1>
+        <p>enter password</p>
+        <input onChange={(e) => setId(e.target.value)}></input>
+        <p>enter username</p>
+        <input onChange={(e) => setUsername(e.target.value)}></input>
+        <button onClick={login}>sginin</button>
+      </div>
     </>
   );
 }

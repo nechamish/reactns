@@ -8,7 +8,9 @@ import Manager from "./component/Manager";
 import Business from "./component/Business";
 function App() {
   return (
-    <Manager></Manager>
+  // <Signiin></Signiin>
+  <Manager></Manager>
+
     // <Business></Business>
     // <div className="App">
     //   <Router>

@@ -2,73 +2,42 @@ import react from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Manager() {
   const [manager, setManager] = useState();
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+useEffect(() => {
   const detailsmanager = async () => {
     try {
       const res = await axios
         .get(
-          "https://meetings-test.herokuapp.com/user/d0bed1c9-ead8-4527-acf9-f8bf84efba6c"
+          "https://meetings-test.herokuapp.com/user/5e8da483-0a02-4131-b52f-648cf5e4c974"
         )
         .then((res) => {
           setManager(res.data);
           console.log(manager);
-          // if (manager != undefined) {
-          //   return (Object.keys(manager).map(function (keyName, keyIndex) {
-          //     <p>{keyName}</p>;
-          //     <p>{manager[keyName]}</p>;
-          //   }));
-          // }
           debugger;
         });
     } catch (err) {
       console.log(err);
     }
   };
+    detailsmanager();
+}, []);
 
-  const changemanager = async () => {
-    let manager;
-    try {
-      const res = await axios
-        .put(
-          "https://meetings-test.herokuapp.com/user/d0bed1c9-ead8-4527-acf9-f8bf84efba6c"
-        )
-        .then((res) => {
-          manager = res.data;
-          console.log(manager);
-          //  if (manager != undefined) {
-          //    return Object.keys(manager).map(function (
-          //      keyName,
-          //      keyIndex
-          //    ) {
-          //      <p>{keyName}</p>;
-          //      <p>{manager[keyName]}</p>;
-          //    });
-          //  }
-          debugger;
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const deletemanager = async () => {
-    let manager;
     try {
       const res = await axios
         .delete(
-          "https://meetings-test.herokuapp.com/user/d0bed1c9-ead8-4527-acf9-f8bf84efba6c"
+          "https://meetings-test.herokuapp.com/user/5e8da483-0a02-4131-b52f-648cf5e4c974"
         )
         .then((res) => {
           manager = res.data;
           console.log(manager);
-          if (manager != undefined) {
-            return Object.keys(manager).map(function (keyName, keyIndex) {
-              <p>{keyName}</p>;
-              <p>{manager[keyName]}</p>;
-            });
-          }
           debugger;
         });
     } catch (err) {
@@ -76,50 +45,62 @@ export default function Manager() {
     }
   };
 
-  // const navigate = useNavigate();
-
-  // const business=(async)=>{
-  //   navigate('/Business');
-  // }
-
-  // const services = (async) => {
-  //   navigate("/Business");
-  // };
-
-  // const meetings = (async) => {
-  //     navigate("/Business");
-  // };
+     const updateCustomer = async (e) => {
+       e.preventDefault();
+       const customer = {
+         user: {
+           username,
+           password,
+         },
+       };
+       console.log(customer);
+       try {
+         const res = await axios
+           .put(
+             ("https://meetings-test.herokuapp.com/user/5e8da483-0a02-4131-b52f-648cf5e4c974",
+             customer)
+           )
+           .then((res) => {
+             console.log(res);
+             debugger;
+           });
+       } catch (err) {
+         console.log(err);
+       }
+     };
 
   return (
     <>
       <div>
-        <button type="button" onClick={detailsmanager}>
-          the detailes
-        </button>
-        <button onClick={changemanager()} type="button">
-          to change the detailes
-        </button>
-        <button onClick={deletemanager()} type="button">
-          to change
+        <h1>Manager</h1>
+        <button onClick={deletemanager} type="button">
+          deletemanager
         </button>
       </div>
       {manager != undefined ? (
         <div>
-          <p>{manager.id}</p>
-          <p>{manager.password}</p>
-          {Object.keys(manager).map(function (keyName, keyIndex) {
-            <p>hbcjknlc;;</p>;
-            <p>keyName</p>;
-            <p>{manager[keyName]}</p>;
-          })}
+          <h1>Manager</h1>
+          <p>id: {manager.id}</p>
+          <p>password: {manager.password}</p>
+          <p>username: {manager.username}</p>
         </div>
       ) : (
         <div></div>
       )}
-
-      {/* <button onClick={business()}>To business</button>
-    <button onClick={services()}>To services</button>
-    <button onClick={meetings()}>To meetings</button> */}
+      <h1>Add User</h1>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUserName(e.target.value)}
+      />{" "}
+      <br />
+      <input
+        type="text"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />{" "}
+      <br />
+      <button onClick={updateCustomer}>update user</button>
     </>
   );
 }
