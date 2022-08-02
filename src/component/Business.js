@@ -8,12 +8,11 @@ export default function Business() {
       debugger;
       try {
         debugger;
-        const res = await axios
+        await axios
           .get(
             "https://meetings-test.herokuapp.com/business/5e8da483-0a02-4131-b52f-648cf5e4c974"
           )
           .then((res) => {
-            debugger;
             setBusiness(res.data); 
             console.log("inserted: " + res.data);
           });
@@ -27,7 +26,6 @@ export default function Business() {
 
 
   const changebusiness = (async) => {
-    let business;
     try {
       const res = axios
         .put(
