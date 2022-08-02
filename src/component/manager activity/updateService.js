@@ -18,8 +18,8 @@ export default function UpdateService() {
     const inputDuration = useRef();
     const inputCost = useRef();
     const inputOpeningHours = useRef()
-    const inputNumber = useLocation();
-    const inputCity = location.state;
+    const inputNumber = useRef();
+    const inputCity = useRef();
     const inputStreet = useRef();
 
     useEffect(() => {
