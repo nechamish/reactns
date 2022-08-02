@@ -9,8 +9,7 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function ManagerServicesActive() {
-    const [businessId, setBusinessId] = useState("20db5cfa-2016-44ae-a3a4-63218ff21d3c");
-    const [serviceId, setServiceId] = useState("66fce059-0e66-49f6-8181-f48d01d5b4bd");
+    const [businessId, setBusinessId] = useState("");
     const [data, setData] = useState([]);
 
     const location = useLocation();
@@ -36,9 +35,9 @@ export default function ManagerServicesActive() {
         navigate("/updateService", { state: { id: idService } });
     }
 
-    const deleteServices = async () => {
+    const deleteServices = async (id) => {
         try {
-            const result = await axios.delete(`https://meetings-test.herokuapp.com/service/${serviceId}`)
+            const result = await axios.delete(`https://meetings-test.herokuapp.com/service/${id}`)
             console.log(result);
         } catch (error) {
             console.error(error);
@@ -87,7 +86,7 @@ export default function ManagerServicesActive() {
                             <Button onClick={() => { updateServices(item.id) }} size="small" color="primary">
                                 edit
                             </Button>
-                            <Button onClick={deleteServices} size="small" color="primary">
+                            <Button onClick={() => { deleteServices(item.id) }} size="small" color="primary">
                                 delete
                             </Button>
                         </CardActions>
