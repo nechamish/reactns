@@ -6,6 +6,7 @@ import ManagerServicesActive from "./component/manager activity/managerServicesA
 import SignIn from "./component/Signin";
 import User from "./component/User";
 import Manager from "./component/Manager";
+import UpdateService from "./component/manager activity/updateService";
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/signIn" element={<SignIn />} />
                 <Route path="/user" element={<User />} />
                 <Route path="/manager" element={<Manager />}/>
+                <Route path="/updateService" element={<UpdateService />}/>
               </Routes>
             </Suspense>
           {/* </Nav> */}

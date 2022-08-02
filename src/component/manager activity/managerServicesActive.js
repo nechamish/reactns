@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function ManagerServicesActive() {
     // const [managerId, setManagerId] = useState("5e8da483-0a02-4131-b52f-648cf5e4c974");
@@ -33,8 +33,10 @@ export default function ManagerServicesActive() {
     });
     // , [location.state.managerId]
 
-    const updateServices = () => {
+    const navigate= useNavigate();
 
+    const updateServices = (idService) => {
+        navigate("/updateService", { state: { id: idService } });
     }
 
     const deleteServices = async () => {
@@ -89,7 +91,7 @@ export default function ManagerServicesActive() {
                             </CardContent>
                         </CardActionArea>
                         <CardActions>
-                            <Button onClick={updateServices} size="small" color="primary">
+                            <Button onClick={() => { updateServices(item.id) }} size="small" color="primary">
                                 edit
                             </Button>
                             <Button onClick={deleteServices} size="small" color="primary">
