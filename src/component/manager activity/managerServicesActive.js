@@ -9,31 +9,28 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function ManagerServicesActive() {
-    // const [managerId, setManagerId] = useState("5e8da483-0a02-4131-b52f-648cf5e4c974");
     const [businessId, setBusinessId] = useState("20db5cfa-2016-44ae-a3a4-63218ff21d3c");
     const [serviceId, setServiceId] = useState("66fce059-0e66-49f6-8181-f48d01d5b4bd");
     const [data, setData] = useState([]);
 
     const location = useLocation();
-        // const form = location.state;
+    // const form = location.state;
 
     useEffect(() => {
         async function getBusiness() {
             try {
-                await axios.get(`https://meetings-test.herokuapp.com/business/${location.state.managerId}`)
-                    .then((res) => {
-                        setBusinessId(res.data.id)
-                        console.log("business: " + res.data);
-                    })
+                const res = await axios.get(`https://meetings-test.herokuapp.com/business/${location.state.managerId}`)
+                setBusinessId(res.data.id)
+                console.log("business: " + res.data);
             } catch (err) {
                 console.log(err)
             }
         }
         getBusiness();
-    },[]);
+    }, []);
     // , [location.state.managerId]
 
-    const navigate= useNavigate();
+    const navigate = useNavigate();
 
     const updateServices = (idService) => {
         navigate("/updateService", { state: { id: idService } });
@@ -41,12 +38,8 @@ export default function ManagerServicesActive() {
 
     const deleteServices = async () => {
         try {
-            await axios.delete(`https://meetings-test.herokuapp.com/service/${serviceId}`)
-                .then((result) => {
-                    console.log(result);
-                }).catch((err) => {
-                    console.error(err);
-                });
+            const result = await axios.delete(`https://meetings-test.herokuapp.com/service/${serviceId}`)
+            console.log(result);
         } catch (error) {
             console.error(error);
         }
@@ -54,16 +47,16 @@ export default function ManagerServicesActive() {
 
     useEffect(() => {
         async function getServices() {
-            await axios(`https://meetings-test.herokuapp.com/service?business_id=${businessId}`)
-                .then((result) => {
-                    console.log("services: " + result.data);
-                    setData(result.data);
-                }).catch((err) => {
-                    console.error(err);
-                });
+            try {
+                const result = await axios(`https://meetings-test.herokuapp.com/service?business_id=${businessId}`)
+                console.log("services: " + result.data);
+                setData(result.data)
+            } catch (error) {
+                console.error(error);
+            }
         }
         getServices();
-    },[businessId])
+    }, [businessId])
 
     return (
         <ul>

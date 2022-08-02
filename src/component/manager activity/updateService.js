@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
 
@@ -25,11 +24,9 @@ export default function UpdateService() {
     useEffect(() => {
         async function getService() {
             try {
-                await axios.get(`https://meetings-test.herokuapp.com/service/${form.id}`)
-                    .then((res) => {
-                        setService(res.data)
-                        console.log("service: " + res.data);
-                    })
+                const res = await axios.get(`https://meetings-test.herokuapp.com/service/${form.id}`)
+                setService(res.data)
+                console.log("service: " + res.data);
             } catch (err) {
                 console.log(err)
             }
@@ -54,10 +51,8 @@ export default function UpdateService() {
             }
         }
         try {
-            await axios.put(`https://meetings-test.herokuapp.com/service/${service.id}`, inputService)
-                .then((res) => {
-                    console.log("business: " + res);
-                })
+            const res = await axios.put(`https://meetings-test.herokuapp.com/service/${service.id}`, inputService)
+            console.log("business: " + res);
         } catch (error) {
             console.error("in update service: " + error.message);
         }
