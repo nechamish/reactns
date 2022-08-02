@@ -30,7 +30,7 @@ export default function ManagerServicesActive() {
             }
         }
         getBusiness();
-    });
+    },[]);
     // , [location.state.managerId]
 
     const navigate= useNavigate();
@@ -63,7 +63,7 @@ export default function ManagerServicesActive() {
                 });
         }
         getServices();
-    })
+    },[businessId])
 
     return (
         <ul>
